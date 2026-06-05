@@ -1,0 +1,75 @@
+
+project:
+  name: mineral-india
+  version: "1.0.0"
+  gee_project: "mineral-prospectivity-map"   # replace with yours
+
+study_area:
+  name: "Keonjhar_Core"
+  bbox:
+    lon_min: 85.3
+    lat_min: 21.4
+    lon_max: 85.8
+    lat_max: 21.9
+  crs: "EPSG:32644"
+
+sentinel2:
+  collection: "COPERNICUS/S2_SR_HARMONIZED"
+  date_start: "2023-11-01"
+  date_end:   "2024-02-28"
+  cloud_threshold: 10
+  bands:
+    - "B2"
+    - "B3"
+    - "B4"
+    - "B8"
+    - "B11"
+    - "B12"
+    - "SCL"
+  scale: 20
+
+
+aster:
+  collection: "NASA/ASTER_GED/AG100_003"
+  bands:
+    - "temperature"
+    - "emissivity_band10"
+    - "emissivity_band11"
+    - "emissivity_band12"
+    - "emissivity_band13"
+    - "emissivity_band14"
+
+srtm:
+  collection: "USGS/SRTMGL1_003"
+  scale: 30
+
+minerals:
+  classes:
+    0: "background"
+    1: "iron_ore"
+    2: "bauxite"
+    3: "chromite"
+    4: "manganese"
+    5: "limestone"
+    6: "copper"
+
+patches:
+  size: 64          # 64×64 pixels per patch
+  stride: 32        # overlap between patches (50%)
+  buffer_m: 500     # buffer around deposit points (metres)
+
+training:
+  test_size: 0.2
+  val_size:  0.1
+  random_seed: 42
+  batch_size: 32
+  epochs: 50
+  learning_rate: 0.001
+
+paths:
+  raw:       "data/raw"
+  processed: "data/processed"
+  labels:    "data/labels"
+  patches:   "data/patches"
+  models:    "models"
+  outputs:   "outputs"
