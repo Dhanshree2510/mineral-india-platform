@@ -1,0 +1,191 @@
+# ─────────────────────────────────────────────────────────────────
+# .gitignore — mineral-india prospectivity mapper
+# ─────────────────────────────────────────────────────────────────
+
+# ── Python ───────────────────────────────────────────────────────
+__pycache__/
+*.py[cod]
+*$py.class
+*.pyo
+*.pyd
+.Python
+*.egg
+*.egg-info/
+dist/
+build/
+eggs/
+parts/
+var/
+sdist/
+develop-eggs/
+.installed.cfg
+lib/
+lib64/
+
+# ── Virtual environments ──────────────────────────────────────────
+.env
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+conda-env/
+
+# ── Jupyter notebooks ────────────────────────────────────────────
+.ipynb_checkpoints/
+*.ipynb_checkpoints
+profile_default/
+ipython_config.py
+
+# ── Satellite data — large binary files tracked by DVC ───────────
+# Raw GeoTIFFs (can be 100MB–2GB each)
+data/raw/*.tif
+data/raw/*.TIF
+data/raw/*.hdf
+data/raw/*.HDF
+data/raw/*.h5
+data/raw/aster_raw/
+
+# Processed rasters
+data/processed/*.tif
+data/processed/*.TIF
+
+# Patch datasets (can be gigabytes)
+data/patches/
+data/patches/**
+
+# Label rasters
+data/labels/*.tif
+data/labels/*.TIF
+
+# Keep folder structure but not the data
+!data/raw/.gitkeep
+!data/processed/.gitkeep
+!data/patches/.gitkeep
+!data/labels/.gitkeep
+!data/labels/gsi_raw/.gitkeep
+
+# ── DVC — data version control ───────────────────────────────────
+# Keep .dvc files (they are the pointers, not the data)
+# Keep dvc.yaml and dvc.lock
+# Ignore the DVC cache (large binary store)
+.dvc/cache/
+.dvc/tmp/
+.dvc/plots/
+
+# ── Model weights and checkpoints ────────────────────────────────
+models/
+*.pth
+*.pt
+*.pkl
+*.joblib
+*.h5
+*.keras
+*.onnx
+checkpoints/
+
+# ── MLflow experiment tracking ───────────────────────────────────
+# mlruns/ contains experiment logs — keep for team sharing
+# but ignore large artifact files inside it
+mlruns/**/artifacts/*.tif
+mlruns/**/artifacts/*.pkl
+mlruns/**/artifacts/*.pth
+mlruns/**/artifacts/*.pt
+
+# ── Outputs ──────────────────────────────────────────────────────
+outputs/prospectivity_maps/*.tif
+outputs/verification/*.png
+outputs/**/*.png
+outputs/**/*.tif
+
+# Keep output folder structure
+!outputs/.gitkeep
+!outputs/verification/.gitkeep
+!outputs/prospectivity_maps/.gitkeep
+
+# ── Logs ─────────────────────────────────────────────────────────
+logs/
+*.log
+*.log.*
+airflow/logs/
+
+# ── Credentials and secrets ───────────────────────────────────────
+# NEVER commit these
+.env
+.env.*
+!.env.example
+secrets/
+*.pem
+*.key
+service_account.json
+gee_credentials.json
+credentials.json
+token.json
+~/.netrc
+
+# ── Google Earth Engine ───────────────────────────────────────────
+.config/earthengine/
+ee_token.json
+
+# ── IDE and editor files ─────────────────────────────────────────
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# ── pytest and coverage ──────────────────────────────────────────
+.pytest_cache/
+.coverage
+coverage.xml
+htmlcov/
+.tox/
+nosetests.xml
+test-results/
+
+# ── Docker ───────────────────────────────────────────────────────
+# Keep Dockerfiles and docker-compose — ignore local volumes
+docker/volumes/
+.docker/
+
+# ── OS generated ─────────────────────────────────────────────────
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# ── Temporary files ───────────────────────────────────────────────
+tmp/
+temp/
+*.tmp
+*.temp
+*.bak
+*.swp
+
+# ── Rasterio / GDAL scratch files ────────────────────────────────
+*.ovr
+*.aux.xml
+*.aux
+*.tfw
+*.tifw
+*.xml
+!configs/*.xml
+
+# ── Tile download intermediates ───────────────────────────────────
+data/raw/*_tiles/
+data/raw/*_tmp.tif
+
+# ── numpy / scipy ────────────────────────────────────────────────
+*.npy
+*.npz
+
+# ── requirements lock files (keep requirements.txt) ───────────────
+pip-log.txt
+pip-delete-this-directory.txt
